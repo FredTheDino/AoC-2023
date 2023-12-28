@@ -1,68 +1,36 @@
-M = parti id !=, @\n &fras "input"
+M ← ⊜∘ ≠, @\n &fras "input"
 
-Z = [... reshape :0 shape M]
+Z ← [... ↯ :0 △ M]
 
-U = 0
-R = 1
-D = 2
-L = 3
+U ← 0
+R ← 1
+D ← 2
+L ← 3
 
-X = indexof :".|-/\\"
-W = *fork(>0/*< first shape M |>0/*>=0 |id) +join 0 ([neg1 0]|[0 1]|[1 0]|[0 neg1]) first . unbox
+X ← ⊗ :".|-/\\" ⊡ :M .⊚ =2
+W ← ×⊃(>0/×< ⊢ △ M|>0/×≥0|∘) +⊂ 0 ([¯1 0]|[0 1]|[1 0]|[0 ¯1]) ⊢ . °□
 
 []
-row(box join 0) range first shape M
-fold(join [fork(box join R rev|box join D)] unbox)
-row(box join -1 first shape M) range first shape M
-fold(join [fork(box join L rev|box join U)] unbox)
+≡(□ ⊂ 0) ⇡ ⊢ △ M
+∧(⊂ [⊃(□ ⊂ R ⇌|□ ⊂ D)] °□)
+≡(□ ⊂ -1 ⊢ △ M) ⇡ ⊢ △ M
+∧(⊂ [⊃(□ ⊂ L ⇌|□ ⊂ U)] °□)
 
-row(
-under(pick|2;) unbox:Z
-do(
-fork(
-      pick U
-      X pick :M .where =2
-      rows(box( [join U] #.
-              | [join U] #|
-              | [fork(join L|join R)] #-
-              | [join R] #/
-              | [join L] #\
-              ))
-    |
-      pick R
-      X pick :M .where =2
-      rows(box( [join R] #.
-              | [fork(join D|join U)] #|
-              | [join R] #-
-              | [join U] #/
-              | [join D] #\
-              ))
-    |
-      pick D
-      X pick :M .where =2
-      rows(box( [join D] #.
-              | [join D] #|
-              | [fork(join L|join R)] #-
-              | [join L] #/
-              | [join R] #\
-              ))
-    |
-      pick L
-      X pick :M .where =2
-      rows(box( [join L] #.
-              | [fork(join D|join U)] #|
-              | [join L] #-
-              | [join D] #/
-              | [join U] #\
-              ))
-    |id
+≡(
+  ⍜(⊡|2;) °□:Z
+  ⍢(
+    ⊃(
+      ≡(□([⊂ U]|[⊂ U]|[⊃(⊂ L|⊂ R)]|[⊂ R]|[⊂ L])) X ⊡ U
+    | ≡(□([⊂ R]|[⊃(⊂ D|⊂ U)]|[⊂ R]|[⊂ U]|[⊂ D])) X ⊡ R
+    | ≡(□([⊂ D]|[⊂ D]|[⊃(⊂ L|⊂ R)]|[⊂ L]|[⊂ R])) X ⊡ D
+    | ≡(□([⊂ L]|[⊃(⊂ D|⊂ U)]|[⊂ L]|[⊂ D]|[⊂ U])) X ⊡ L
+    | ∘
     )
-joinjoinjoin
-fold(join rows(box) unbox) :[]
-dip(box>0)
-unbox fold(box (;|under(pick|(2|1|2))) W dipunbox)
-
-)(>0/+=2deshape)
-/+/+>0 /+
+    ⊂⊂⊂
+    ∧(⊂ ≡(□) °□) :[]
+    ⊙(□>0)
+    °□ ∧(□ (;|⍜(⊡|(2|1|2))) W ⊙°□)
+  )(>0/+=2♭)
+  /+/+>0 /+
 )
-/max
+/↥
